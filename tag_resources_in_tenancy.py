@@ -15,19 +15,18 @@
 # Connectivity:
 #    Option 1 - User Authentication
 #       $HOME/.oci/config, please follow - https://docs.cloud.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm
-#
 #    Option 2 - Instance Principle
 #    Option 3 - Token Delegation using cloud shell
 #
 ##########################################################################
 # Modules Included:
-# oci.core.ComputeClient
-# oci.core.BlockstorageClient
-# oci.core.VirtualNetworkClient
-# oci.identity.IdentityClient
-# oci.load_balancer.LoadBalancerClient
-# oci.database.DatabaseClient
-# oci.object_storage.ObjectStorageClient
+# - oci.core.ComputeClient
+# - oci.core.BlockstorageClient
+# - oci.core.VirtualNetworkClient
+# - oci.identity.IdentityClient
+# - oci.load_balancer.LoadBalancerClient
+# - oci.database.DatabaseClient
+# - oci.object_storage.ObjectStorageClient
 #
 ##########################################################################
 # Application Command line parameters
@@ -50,10 +49,12 @@ import oci
 import json
 import os
 
-# global variables
+# global variables for tags
 assign_tag_namespace = ""
 assign_tag_key = ""
 assign_tag_value = ""
+
+# global variables
 errors = 0
 data = []
 cmd = ""
@@ -93,13 +94,18 @@ def print_header(name):
 ##########################################################################
 def get_string_dict(dic, namespace=False):
     retval = ""
+
+    # if not dictionary
     if dic is None or dic == "":
         return retval
+
+    # if namespace
     if namespace:
         for key, val in dic.items():
             if len(retval) > 0:
                 retval += ", "
             retval += key + "." + "".join("{}={}".format(k, v) for k, v in val.items())
+    # if free
     else:
         retval = ', '.join("{}={}".format(k, v) for k, v in dic.items())
     return retval

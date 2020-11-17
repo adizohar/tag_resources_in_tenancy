@@ -74,7 +74,7 @@ optional arguments:
 
 ```
 
-## Example Execution:
+## Example Execution for adding defined Tags:
 ```
 python3 tag_resources_in_tenancy.py -action add_defined -tag BillingNS.Division=TEST -cp TestCompartment -rg us-ashburn-1 
 
@@ -160,6 +160,92 @@ us-ashburn-1 | TestCompartment   | Object Storage Buckets | usage_cost_bucket   
 
 ##########################################################################################
 #                            Completed at 2020-11-16 21:15:37                            #
+##########################################################################################
+
+```
+## Example Execution for adding freeform tags:
+```
+python3 tag_resources_in_tenancy.py -cp cpTest -rg ashbu -tag "Prog=Test Space" -action add_free
+
+Connecting to Identity Service...
+Loading Compartments...
+    Total 1 compartments loaded.
+
+##########################################################################################
+#                                  Running Tag Conpute                                   #
+##########################################################################################
+Written By Adi Zohar, Nov 2020
+Starts at 2020-11-16 21:34:13
+Command Line  : -cp cpTest -rg ashbu -tag Prog=Test Space -action add_free
+Tag Key       : Prog
+Tag Value     : Test Space
+Tenant Name   : TestTenant
+Tenant Id     : ocid1.tenancy.oc1..aaaaaaaaxtkkpxc5qwgpwx7y2wt5pinegyzea4uacnmck7ixxxxxx
+
+
+Processing Regions...
+
+Region us-ashburn-1...
+    Compartment cpTest
+        Instances              - 2     Tag Added = 2         Tag Exist = 0
+        Boot Volumes           - 2     Tag Added = 2         Tag Exist = 0
+        Boot Volumes Backups   - 22    Tag Added = 22        Tag Exist = 0
+        Block Volumes          - 1     Tag Added = 1         Tag Exist = 0
+        Block Volumes Backups  - (-)
+        Volume Groups          - (-)
+        Volume Groups Backup   - (-)
+        Network VCNs           - 2     Tag Added = 2         Tag Exist = 0
+        Network Subnets        - 3     Tag Added = 3         Tag Exist = 0
+        Network CPEs           - (-)
+        Network DHCPs          - 2     Tag Added = 2         Tag Exist = 0
+        Network IGWs           - 1     Tag Added = 1         Tag Exist = 0
+        Network IPSECs         - (-)
+        Network LPGs           - 2     Tag Added = 2         Tag Exist = 0
+        Network NATGWs         - 2     Tag Added = 2         Tag Exist = 0
+        Network NSGs           - 2     Tag Added = 2         Tag Exist = 0
+        Network RPGs           - 1     Tag Added = 1         Tag Exist = 0
+        Network Routes         - 4     Tag Added = 4         Tag Exist = 0
+        Network SLs            - 2     Tag Added = 2         Tag Exist = 0
+        Network SGWs           - 1     Tag Added = 1         Tag Exist = 0
+        Network VCircuit       - (-)
+        Load Balancers         - 1     Tag Added = 1         Tag Exist = 0
+        DB DB Systems          - (-)
+        DB Autonomous          - 1     Tag Added = 1         Tag Exist = 0
+        Object Storage Buckets - 5     Tag Added = 5         Tag Exist = 0
+
+##########################################################################################
+#                                     Output as List                                     #
+##########################################################################################
+us-ashburn-1 | cpTest    | Instances              | adiwin               | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Instances              | adiwork              | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Boot Volumes           | adiwin (Boot Volume) | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Boot Volumes           | adiwork (Boot Volume)| Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Block Volumes          | adiwork-100g         | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network VCNs           | vcnspoke             | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network VCNs           | vcn                  | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network Subnets        | privsubspoke         | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network Subnets        | privsub              | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network Subnets        | pubsub               | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network IGWs           | igw                  | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network LPGs           | hubtospoke           | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network LPGs           | spoketohub           | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network NATGWs         | nat                  | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network NATGWs         | NATGW                | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network NSGs           | port80only           | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network NSGs           | vcn_nsg              | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network RPGs           | null                 | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network Routes         | route.lpg            | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Network SGWs           | sgw                  | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Load Balancers         | lb                   | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | DB Autonomous          | ADI_USAGE_19C        | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Object Storage Buckets | AuditBucket          | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Object Storage Buckets | FlowLogs             | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Object Storage Buckets | shared               | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Object Storage Buckets | test_restore         | Added   | Prog=Test Space 
+us-ashburn-1 | cpTest    | Object Storage Buckets | usage_cost_bucket    | Added   | Prog=Test Space 
+
+##########################################################################################
+#                            Completed at 2020-11-16 21:34:45                            #
 ##########################################################################################
 
 
