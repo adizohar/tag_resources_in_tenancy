@@ -17,6 +17,7 @@
 #       $HOME/.oci/config, please follow - https://docs.cloud.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm
 #
 #    Option 2 - Instance Principle
+#    Option 3 - Token Delegation using cloud shell
 #
 ##########################################################################
 # Modules Included:
