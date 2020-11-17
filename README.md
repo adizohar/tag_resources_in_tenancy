@@ -31,20 +31,8 @@ Output can be printer friendly, Summary or JSON.
    python3 tag_resources_in_tenancy.py --help
 ```
 
-## OCI Authentication using Instance Principals - Privilges can be aligned accordingly
-
-Create Dynamic Group ShowOCIDynamicGroup:
-```
-any {ALL {instance.id = 'ocid1.instance.oc1.xxxxxxxxxx'}}
-```
-
-Add Policy:
-```
-allow dynamic-group ShowOCIDynamicGroup to manage all-resources in tenancy
-```
-
 ## OCI Authentication using User - Privilges can be aligned accordingly
-Required OCI IAM user with read only privileges
+Required OCI IAM user with manage privileges to the compartment you aim to tag
 
 ```
 ALLOW GROUP ReadOnlyUsers to manage all-resources IN TENANCY
@@ -86,3 +74,93 @@ optional arguments:
 
 ```
 
+## Example Execution:
+```
+python3 tag_resources_in_tenancy.py -action add_defined -tag BillingNS.Division=TEST -cp TestCompartment -rg us-ashburn-1 
+
+Connecting to Identity Service...
+Loading Compartments...
+    Total 1 compartments loaded.
+
+##########################################################################################
+#                                  Running Tag Conpute                                   #
+##########################################################################################
+Written By Adi Zohar, Nov 2020
+Starts at 2020-11-16 21:15:20
+Command Line  : -action add_defined -tag BillingNS.Division=TEST -cp TestCompartment -rg us-ashburn-1 
+Tag Namespace : BillingNS
+Tag Key       : Division
+Tag Value     : TEST
+Tenant Name   : test_tenant
+Tenant Id     : ocid1.tenancy.oc1..aaaaaaaaxxxxxxxxxx
+
+
+Reading Tag Namespaces...
+   Found Tag Namespace 'BillingNS', id = ocid1.tagnamespace.oc1..aaaaaaaaxgdcknccy4dsmr7s64iafc6s6rznnc2bvitxxxxxxxxxxxx
+   Found Tag Key 'Division', id = ocid1.tagdefinition.oc1..aaaaaaaaxpbe55t574ezmwrgw5qbbwvkrm2r7k6lo4cxcxxxxxxxxxxxxx
+
+Processing Regions...
+
+Region us-ashburn-1...
+    Compartment TestCompartment
+        Instances              - 2     Tag Added = 0         Tag Exist = 2
+        Boot Volumes           - 2     Tag Added = 0         Tag Exist = 2
+        Boot Volumes Backups   - 22    Tag Added = 0         Tag Exist = 22
+        Block Volumes          - 1     Tag Added = 0         Tag Exist = 1
+        Block Volumes Backups  - (-)
+        Volume Groups          - (-)
+        Volume Groups Backup   - (-)
+        Network VCNs           - 2     Tag Added = 0         Tag Exist = 2
+        Network Subnets        - 3     Tag Added = 0         Tag Exist = 3
+        Network CPEs           - (-)
+        Network DHCPs          - 2     Tag Added = 0         Tag Exist = 2
+        Network IGWs           - 1     Tag Added = 0         Tag Exist = 1
+        Network IPSECs         - (-)
+        Network LPGs           - 2     Tag Added = 0         Tag Exist = 2
+        Network NATGWs         - 2     Tag Added = 0         Tag Exist = 2
+        Network NSGs           - 2     Tag Added = 0         Tag Exist = 2
+        Network RPGs           - 1     Tag Added = 0         Tag Exist = 1
+        Network Routes         - 4     Tag Added = 0         Tag Exist = 4
+        Network SLs            - 2     Tag Added = 0         Tag Exist = 2
+        Network SGWs           - 1     Tag Added = 0         Tag Exist = 1
+        Network VCircuit       - (-)
+        Load Balancers         - 1     Tag Added = 0         Tag Exist = 1
+        DB DB Systems          - (-)
+        DB Autonomous          - 1     Tag Added = 0         Tag Exist = 1
+        Object Storage Buckets - 5     Tag Added = 5         Tag Exist = 0
+
+##########################################################################################
+#                                     Output as List                                     #
+##########################################################################################
+us-ashburn-1 | TestCompartment   | Instances              | adiwin               | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Boot Volumes           | adiwin (Boot Volume) | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Boot Volumes           | adiwork (Boot Volume)| Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Block Volumes          | adiwork-100g         | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network VCNs           | vcnspoke             | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network VCNs           | vcn                  | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network Subnets        | privsub              | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network Subnets        | pubsub               | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network IGWs           | igw                  | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network LPGs           | hubtospoke           | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network LPGs           | spoketohub           | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network NATGWs         | nat                  | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network NATGWs         | NATGW                | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network NSGs           | port80only           | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network NSGs           | vcn_nsg              | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network RPGs           | null                 | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network Routes         | route.lpg            | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Network SGWs           | sgw                  | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Load Balancers         | lb                   | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | DB Autonomous          | ADI_USAGE_19C        | Exist   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Object Storage Buckets | AuditBucket          | Added   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Object Storage Buckets | FlowLogs             | Added   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Object Storage Buckets | shared               | Added   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Object Storage Buckets | test_restore         | Added   |  | BillingNS.Division=TEST
+us-ashburn-1 | TestCompartment   | Object Storage Buckets | usage_cost_bucket    | Added   |  | BillingNS.Division=TEST
+
+##########################################################################################
+#                            Completed at 2020-11-16 21:15:37                            #
+##########################################################################################
+
+
+```
