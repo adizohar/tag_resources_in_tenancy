@@ -68,10 +68,9 @@ optional arguments:
   -dt                   Use Delegation Token for Authentication
   -tag TAG              Tag in format - namespace.key=value or key=value
   -action {add_defined,add_free,del_defined,del_free,list}
-                        Action Type, default=list
+                        Action Type
   -output {list,json,summary}
                         Output type, default=summary
-
 ```
 
 ## Example Execution for adding defined Tags:

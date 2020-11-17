@@ -130,7 +130,7 @@ def command_line():
         parser.add_argument('-ip', action='store_true', default=False, dest='is_instance_principals', help='Use Instance Principals for Authentication')
         parser.add_argument('-dt', action='store_true', default=False, dest='is_delegation_token', help='Use Delegation Token for Authentication')
         parser.add_argument('-tag', default="", dest='tag', help='Tag in format - namespace.key=value or key=value')
-        parser.add_argument('-action', default="list", dest='action', choices=['add_defined', 'add_free', 'del_defined', 'del_free', 'list'], help='Action Type, default=list')
+        parser.add_argument('-action', default="", dest='action', choices=['add_defined', 'add_free', 'del_defined', 'del_free', 'list'], help='Action Type')
         parser.add_argument('-output', default="list", dest='output', choices=['list', 'json', 'summary'], help='Output type, default=summary')
         cmd = parser.parse_args()
 
